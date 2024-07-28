@@ -1,0 +1,12 @@
+.mainDiv{
+  border: 2px solid black;
+  height: 70vh;
+  overflow-y: scroll;
+}
+
+.messageDiv{
+  background-color: lightblue;
+  border-radius: 50px;
+  padding-left: 10px;
+  width: 97%;
+}

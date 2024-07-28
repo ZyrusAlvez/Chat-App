@@ -1,0 +1,25 @@
+.mainDiv{
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  width: 100%;
+  align-items: center;
+  height: 13vh;
+  justify-content: center;
+  gap: 30px 5px;
+  margin-top: 10px;
+}
+
+.input{
+  width: 60vw;
+  height: 5vh;
+}
+
+.button{
+  min-width: 5vw;
+  height: 5vh;
+}
+
+.title{
+  justify-self: end;
+  margin: 0;
+}
