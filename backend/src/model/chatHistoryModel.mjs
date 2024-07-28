@@ -19,4 +19,7 @@ const chatHistorySchema = new mongoose.Schema(
 
 const ChatHistory = mongoose.model("ChatHistory", chatHistorySchema);
 // Model name is capitalized, MongoDB collection name will be 'chathistories'
+
+
 export default ChatHistory;
+// returning a mongoose model that will be used to interact with the MongoDB collection

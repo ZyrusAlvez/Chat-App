@@ -3,6 +3,7 @@ import MessageBox from '../../components/main/MessageBox'
 import InputBox from '../../components/main/InputBox'
 import axios from "axios"
 
+
 const Main = () => {
 
   const [messageArray, setMessageArray] = useState([])
@@ -17,6 +18,8 @@ const Main = () => {
         console.log(`axios get error: ${error}`)
       })
   }, [])
+
+
 
   return (
     <div>

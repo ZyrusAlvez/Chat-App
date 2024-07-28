@@ -5,7 +5,6 @@ const chatHistoryRouter = express.Router()
 
 chatHistoryRouter.get("/", async (request, response) => {
   try {
-    console.log('helo')
     const books = await ChatHistory.find({});
     return response.status(200).json(books);
   } catch (error) {

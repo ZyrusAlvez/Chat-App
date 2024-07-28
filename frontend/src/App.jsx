@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Main from './pages/main/Main.jsx'
 import Sign from './pages/sign/Sign.jsx'
-import {createBrowserRouter, RouterProvider} from "react-router-dom"
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
+
 
 const router = createBrowserRouter([
   {
@@ -12,10 +13,12 @@ const router = createBrowserRouter([
     path: "sign",
     element: <Sign />
   }
-  
-  ])
+])
 
 const App = () => {
+  
+
+
   return (
     <div>
       <RouterProvider router={router} />
