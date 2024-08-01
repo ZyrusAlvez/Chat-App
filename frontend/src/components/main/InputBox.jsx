@@ -23,23 +23,22 @@ const MessageInput = ({ setMessageArray }) => {
 
   useEffect(() => {
     if (socketInstance) {
-      socketInstance.on('receive-message', (message) => {
-        console.log('receive message', message);
+      socketInstance.on('receive-message', message => {
         setMessageArray((prevArray) => [...prevArray, message]);
       });
     }
   }, [socketInstance])
 
   function send() {
+    setMessageArray((prevArray) => [...prevArray, data])
     axios
       .post('http://localhost:5000/api/chat/add', data)
       .then((response) => {
         console.log(response);
         // sends the message to the server
         if (socketInstance){
-          socketInstance.emit('message', data)
+          socketInstance.emit('message', data, socketInstance.id)
         }
-        
       })
       .catch((error) => {
         console.log(`axios post error: ${error}`);
