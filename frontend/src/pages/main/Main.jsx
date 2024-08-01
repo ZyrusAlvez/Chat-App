@@ -6,13 +6,13 @@ import axios from "axios"
 
 const Main = () => {
 
-  const [messageArray, setMessageArray] = useState([])
+  const [dataArray, setDataArray] = useState([])
 
   useEffect(() => {
     axios
       .get("http://localhost:5000/api/chat")
       .then((response) => {
-        setMessageArray(response.data)
+        setDataArray(response.data)
       })
       .catch((error) => {
         console.log(`axios get error: ${error}`)
@@ -23,8 +23,8 @@ const Main = () => {
 
   return (
     <div>
-      <MessageBox messages={messageArray}/>
-      <InputBox setMessageArray={setMessageArray}/>
+      <MessageBox dataArray={dataArray}/>
+      <InputBox setDataArray={setDataArray}/>
     </div>
   )
 }

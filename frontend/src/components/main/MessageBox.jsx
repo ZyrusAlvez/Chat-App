@@ -1,17 +1,13 @@
-import React from "react";
 import style from "./MessageBox.module.css";
 
-const MessageBox = ({ messages }) => {
-  // messages is a array of string
 
-  !messages ? messages = [] : null
-  // if there's no msg
-
+const MessageBox = ({ dataArray }) => {
+  console.log(dataArray)
   return (
     <div className={style.mainDiv}>
       <ul>
-        {messages.map((element, index) => (
-          <li key={index} className={style.messageDiv}>{element.message}</li>
+        {dataArray.map((element, index) => (
+          <li key={index} className={style.messageDiv}>{element.sender}: {element.message}</li>
         ))}
       </ul>
     </div>

@@ -13,6 +13,10 @@ const chatHistorySchema = new mongoose.Schema(
     time: {
       type: String,
       required: true
+    },
+    sender: {
+      type: String,
+      required: true
     }
   }
 );

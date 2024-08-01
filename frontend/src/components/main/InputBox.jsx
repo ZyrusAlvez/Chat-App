@@ -1,16 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext, useReducer } from 'react';
 import style from './InputBox.module.css';
 import axios from 'axios';
 import { io } from "socket.io-client"
+import { UserContext } from '../../context/userContext';
 
 
-const MessageInput = ({ setMessageArray }) => {
+const MessageInput = ({ setDataArray }) => {
   const [data, setData] = useState({
     message: '',
     date: '',
     time: '',
+    sender: ''
   });
   const [socketInstance, setSocketInstance] = useState(null);
+  const {username} = useContext(UserContext)
 
   useEffect(() => {
     // initialize the socket (using state variable to be used in other function)
@@ -24,13 +27,13 @@ const MessageInput = ({ setMessageArray }) => {
   useEffect(() => {
     if (socketInstance) {
       socketInstance.on('receive-message', message => {
-        setMessageArray((prevArray) => [...prevArray, message]);
+        setDataArray((prevArray) => [...prevArray, message]);
       });
     }
   }, [socketInstance])
 
   function send() {
-    setMessageArray((prevArray) => [...prevArray, data])
+    setDataArray((prevArray) => [...prevArray, data])
     axios
       .post('http://localhost:5000/api/chat/add', data)
       .then((response) => {
@@ -51,6 +54,7 @@ const MessageInput = ({ setMessageArray }) => {
       message: event.target.value,
       date: currentDateTime.toLocaleDateString(),
       time: currentDateTime.toLocaleTimeString(),
+      sender: username
     });
     
   };
