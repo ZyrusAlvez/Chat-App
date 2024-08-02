@@ -38,6 +38,8 @@ const MessageInput = ({ setDataArray }) => {
       .post('http://localhost:5000/api/chat/add', data)
       .then((response) => {
         console.log(response);
+        setData({...data, message: ""})
+        console.log(data)
         // sends the message to the server
         if (socketInstance){
           socketInstance.emit('message', data, socketInstance.id)
@@ -62,7 +64,7 @@ const MessageInput = ({ setDataArray }) => {
   return (
     <div className={style.mainDiv}>
       <h1 className={style.title}>Message</h1>
-      <input onChange={handleChange} className={style.input} />
+      <input onChange={handleChange} className={style.input} value={data.message}/>
       <button onClick={send} className={style.button} disabled={!socketInstance}>Send</button>
       <h1 className={style.title}>Room</h1>
       <input className={style.input} />

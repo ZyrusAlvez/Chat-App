@@ -1,10 +1,10 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import Main from './pages/main/Main.jsx';
 import SignIn from './pages/sign/SignIn.jsx';
-import LogIn from "./pages/log/LogIn.jsx"
+import LogIn from "./pages/log/LogIn.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { UserProvider, UserContext } from './context/userContext.jsx';
-import axios from "axios";
+import { UserProvider } from './context/userContext.jsx';
+import useGenerateUsername from './custom hook/useGenerateUsername.jsx';
 
 const router = createBrowserRouter([
   {
@@ -21,31 +21,16 @@ const router = createBrowserRouter([
   }
 ]);
 
-const AppContent = () => {
-  const { setUsername } = useContext(UserContext);
-
-  useEffect(() => {
-    axios
-      .post("http://localhost:5000/api/user/post", { username: "Guest_", password: "pass_" })
-      .then((response) => {
-        console.log(response);
-        setUsername(response.data.username);
-        console.log("dummy account created!");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [setUsername]);
+const App = () => {
+  useGenerateUsername();
 
   return <RouterProvider router={router} />;
 };
 
-const App = () => {
-  return (
-    <UserProvider>
-      <AppContent />
-    </UserProvider>
-  );
-};
+const RootApp = () => (
+  <UserProvider>
+    <App />
+  </UserProvider>
+);
 
-export default App;
+export default RootApp;

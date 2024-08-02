@@ -1,10 +1,9 @@
 import style from "./MessageBox.module.css";
-import { useContext } from "react";
-import {UserContext} from "../../context/userContext"
+import useUserContext from "../../custom hook/useUserContext";
 
 
 const MessageBox = ({ dataArray }) => {
-  const {username} = useContext(UserContext)
+  const {username} = useUserContext()
 
   return (
     <div className={style.mainDiv}>
