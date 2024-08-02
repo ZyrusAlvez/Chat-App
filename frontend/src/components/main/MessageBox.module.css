@@ -10,3 +10,7 @@
   padding-left: 10px;
   width: 97%;
 }
+
+.messageDiv.sender{
+  background-color: lightpink;
+}

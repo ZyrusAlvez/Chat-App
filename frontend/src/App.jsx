@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import Main from './pages/main/Main.jsx';
-import Sign from './pages/sign/Sign.jsx';
+import SignIn from './pages/sign/SignIn.jsx';
+import LogIn from "./pages/log/LogIn.jsx"
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { UserProvider, UserContext } from './context/userContext.jsx';
 import axios from "axios";
@@ -12,7 +13,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/sign",
-    element: <Sign />
+    element: <SignIn />
+  },
+  {
+    path: "/log",
+    element: <LogIn />
   }
 ]);
 

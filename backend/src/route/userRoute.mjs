@@ -31,10 +31,7 @@ userRouter.post("/post", async (request, response) => {
       username: request.body.username,
       password: request.body.password
     }
-    console.log(newUser)
     const user = await UserModel.create(newUser)
-    console.log(user)
-
     const result = await UserModel.findByIdAndUpdate(user._id, {
       username: request.body.username + user._id,
       password: request.body.password + user._id
@@ -60,6 +57,21 @@ userRouter.put("/put/:id", async (request, response) => {
     response.status(200).send({message: "successfully updated"})
   }catch(error){
     console.log(`put error ${error}`)
+    response.status(400).send({message: error.message})
+  }
+})
+
+userRouter.post("/log", async (request, response) => {
+  try{
+    const {username, password} = request.body
+    const result = await UserModel.findOne({username, password})
+    console.log(result)
+    if (result){
+      response.status(200).json({message: "login successfully", result})
+    }else{
+      response.status(404).send({message: "Incorrect password"})
+    }
+  }catch(error){
     response.status(400).send({message: error.message})
   }
 })

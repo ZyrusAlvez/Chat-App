@@ -18,7 +18,8 @@ chatHistoryRouter.post("/add", async (request, response) => {
     const newChat = {
       message: request.body.message,
       date: request.body.date,
-      time: request.body.time
+      time: request.body.time,
+      sender: request.body.sender
     };
     const chat = await ChatHistory.create(newChat);
     return response.status(201).send(chat);
