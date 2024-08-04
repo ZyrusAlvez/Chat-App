@@ -29,3 +29,5 @@ const useGenerateUsername = () => {
 export default useGenerateUsername;
 // using the browser's local storage to generate username only once
 // this will also help the user to stay logged in even after closing the website
+
+// might use cookie later on
