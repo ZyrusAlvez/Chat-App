@@ -32,10 +32,18 @@ userRouter.post("/post", async (request, response) => {
       password: request.body.password
     }
     const user = await UserModel.create(newUser)
+
     const result = await UserModel.findByIdAndUpdate(user._id, {
       username: request.body.username + user._id,
       password: request.body.password + user._id
     }, {new: true})
+
+      response.cookie('userId', result._id, {
+        maxAge: 48 * 60 * 60 * 1000, // 48 hours in milliseconds
+        httpOnly: true,              // HTTP only, prevents JavaScript access
+        secure: false,               // Set to true if using HTTPS
+        sameSite: 'strict',          // Prevents CSRF attacks
+      })
 
     if (!result){
       response.status(400).send("update error")
