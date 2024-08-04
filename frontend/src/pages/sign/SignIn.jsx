@@ -1,18 +1,21 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useUserContext from "../../custom hook/useUserContext"
 import axios from "axios";
 
 const SignIn = () => {
   const navigate = useNavigate();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const {setUsername} = useUserContext()
+  const [signUsername, setSignUsername] = useState("");
+  const [signPassword, setSignPassword] = useState("");
 
   function send() {
     axios
-      .put("http://localhost:5000/api/user/log", { username, password })
+      .post("http://localhost:5000/api/user/sign", {username: signUsername, password: signPassword})
       .then((response) => {
         console.log(response);
-        navigate("/");
+        navigate("/")
+        setUsername(signUsername)
       })
       .catch((error) => {
         console.log(error);
@@ -23,11 +26,11 @@ const SignIn = () => {
     <div>
       <input
         placeholder="username"
-        onChange={(event) => setUsername(event.target.value)}
+        onChange={(event) => setSignUsername(event.target.value)}
       />
       <input
         placeholder="password"
-        onChange={(event) => setPassword(event.target.value)}
+        onChange={(event) => setSignPassword(event.target.value)}
       />
       <button onClick={send}>Sign In</button>
     </div>
