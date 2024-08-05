@@ -7,6 +7,7 @@ import axios from "axios"
 const Main = () => {
 
   const [dataArray, setDataArray] = useState([])
+  // array of objects
 
   useEffect(() => {
     axios
@@ -19,12 +20,10 @@ const Main = () => {
       })
   }, [])
 
-
-
   return (
     <div>
       <MessageBox dataArray={dataArray}/>
-      <InputBox setDataArray={setDataArray}/>
+      <InputBox dataArray={dataArray} setDataArray={setDataArray}/>
     </div>
   )
 }

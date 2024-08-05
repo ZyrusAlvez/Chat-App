@@ -16,6 +16,8 @@ app.use(express.json());
 app.use("/api/chat", chatHistoryRouter);
 app.use("/api/user", userRouter);
 
+
+let online = 0
 // Connect to MongoDB and start the server
 mongoose
   .connect(database)
@@ -34,9 +36,23 @@ mongoose
     });
 
     io.on("connection", (socket) => {
-      socket.on("message", (data) => {
+      // "socket" paramter is an object that represents an individual client who triggered the event
+      // this do not represent every client's connection
+      online++
+      console.log("online users: ", online)
+
+      socket.on("disconnect", () => {
+        console.log("a client has disconnected");
+        online--;
+        console.log("online users: ", online)
+      })
+
+      // this waits for the event called "message"
+      socket.on("message", (messageData) => {
+
         // Broadcast the message to all connected clients
-        socket.broadcast.emit('receive-message', data, socket.id)
+        // if this is `socket.emit`, this will only emit to the client who triggered the "message" event
+        io.emit('receive-message', messageData)
       });
     });
 
