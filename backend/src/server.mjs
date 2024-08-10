@@ -36,7 +36,7 @@ mongoose
     });
 
     io.on("connection", (socket) => {
-      // "socket" paramter is an object that represents an individual client who triggered the event
+      // "socket" parameter is an object that represents an individual client who triggered the event
       // this do not represent every client's connection
       online++
       console.log("online users: ", online)
@@ -54,6 +54,11 @@ mongoose
         // if this is `socket.emit`, this will only emit to the client who triggered the "message" event
         io.emit('receive-message', messageData)
       });
+
+      socket.on("typing", (username) => {
+        socket.broadcast.emit("is-typing", username)
+        // sends the event to all client except to the "socket" client or except to the sender
+      })
     });
 
   })

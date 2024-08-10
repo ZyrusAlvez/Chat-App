@@ -34,8 +34,11 @@ const MessageInput = ({ dataArray, setDataArray }) => {
         setDataArray((prevArray) => [...prevArray, messageData]);
         console.log("done update")
       });
+      socketInstance.on("is-typing", (typingUsername) => {
+        console.log(typingUsername, "is typing")
+      })
     }
-  }, [socketInstance]);
+  }, [socketInstance]); 
 
   function send() {
     // setDataArray((prevArray) => [...prevArray, data])
@@ -66,6 +69,13 @@ const MessageInput = ({ dataArray, setDataArray }) => {
     });
   }
 
+  function handleFocus(){
+    console.log("you are typing")
+    if (socketInstance) {
+      socketInstance.emit("typing", username);
+    }
+  }
+
   return (
     <div className={style.mainDiv}>
       <h1 className={style.title}>Message</h1>
@@ -73,6 +83,7 @@ const MessageInput = ({ dataArray, setDataArray }) => {
         onChange={handleChange}
         className={style.input}
         value={data.message}
+        onFocus={handleFocus}
       />
       <button
         onClick={send}

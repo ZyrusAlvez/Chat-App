@@ -6,11 +6,9 @@ const useGenerateUsername = () => {
   const { setUsername } = useUserContext();
 
   useEffect(() => {
-    const storedUsername = localStorage.getItem('username');
 
-    if (!storedUsername) {
       axios
-        .post("http://localhost:5000/api/user/post", { username: "Guest_", password: "pass_" })
+        .post("http://localhost:5000/api/user/sign", { username: "Guest_", password: "pass_" })
         .then((response) => {
           const newUsername = response.data.username;
           localStorage.setItem('username', newUsername);
@@ -20,9 +18,7 @@ const useGenerateUsername = () => {
         .catch((error) => {
           console.log(error);
         });
-    } else {
-      setUsername(storedUsername);
-    }
+
   }, [setUsername]);
 };
 
